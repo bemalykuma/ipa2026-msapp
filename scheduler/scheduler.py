@@ -1,4 +1,4 @@
-import time, pika
+import time
 import os
 
 from producer import produce
@@ -6,12 +6,13 @@ from database import get_router_info
 from bson import json_util
 
 def scheduler():
+
     RABBITMQ_HOST = os.environ.get("RABBITMQ_HOST", "localhost")
 
     INTERVAL = 10.0
     next_run = time.monotonic()
     count = 0
-    
+
     while True:
         now = time.time()
         now_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(now))
@@ -30,5 +31,6 @@ def scheduler():
         next_run += INTERVAL
         time.sleep(max(0.0, next_run - time.monotonic()))
 
-if __name__=='__main__':
+if __name__ == '__main__':
+
     scheduler()

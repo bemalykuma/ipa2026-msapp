@@ -30,9 +30,8 @@
   <ul>
     {% for router in routers %}
     <li>
-      {{ router.ip }} -
+      <a href="{{ url_for('router_detail', ip=router.ip) }}">{{ router.ip }}</a> -
       {{ router.username }}
-
       <form method="POST" action="{{ url_for('delete_router', id=router['_id']) }}" style="display:inline">
         <button type="submit">Delete</button>
       </form>

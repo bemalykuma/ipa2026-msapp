@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Router {{ ip }}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>Router: {{ ip }}</h1>
+  <a href="/">← Back</a>
+
+  {% if records %}
+  <table border="1" cellpadding="6" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Timestamp</th>
+        <th>Interface</th>
+        <th>IP Address</th>
+        <th>Status</th>
+        <th>Protocol</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for record in records %}
+        {% for intf in record.interfaces %}
+        <tr>
+          <td>{{ record.timestamp }}</td>
+          <td>{{ intf.interface }}</td>
+          <td>{{ intf.ip_address }}</td>
+          <td>{{ intf.status }}</td>
+          <td>{{ intf.proto }}</td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <p>No interface data found for this router.</p>
+  {% endif %}
+</body>
+</html>
