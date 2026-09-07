@@ -33,5 +33,5 @@ def consume(host):
     ch.start_consuming()
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     consume("localhost")
