@@ -2,6 +2,7 @@ import os
 
 from pymongo import MongoClient
 
+
 def get_router_info():
 
     mongo_uri = os.environ.get("MONGO_URI")
@@ -13,6 +14,7 @@ def get_router_info():
 
     router_data = routers.find()
     return router_data
+
 
 if __name__ == '__main__':
 

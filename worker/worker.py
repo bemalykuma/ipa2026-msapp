@@ -61,7 +61,6 @@ def callback(ch, method, properties, body):
 
     except Exception as e:
         print(f"Error processing job: {e}")
-        # ถ้าพัง ให้ส่ง Nack (requeue=False คือลบทิ้งไปเลย, ถ้าใส่ True มันจะวนกลับเข้า Queue ใหม่)
         ch.basic_nack(delivery_tag=method.delivery_tag, requeue=False)
 
 
@@ -71,7 +70,9 @@ def worker():
     RABBITMQ_PASS = os.environ.get("RABBITMQ_PASS")
 
     credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASS)
-    parameters = pika.ConnectionParameters(host=RABBITMQ_HOST, credentials=credentials)
+    parameters = pika.ConnectionParameters(
+        host=RABBITMQ_HOST, credentials=credentials
+    )
 
     connection = None
     for attempt in range(10):
@@ -103,4 +104,5 @@ def worker():
 
 
 if __name__ == "__main__":
+
     worker()
