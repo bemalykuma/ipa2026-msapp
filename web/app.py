@@ -25,9 +25,7 @@ def add_router():
     username = request.form.get("username")
     password = request.form.get("password")
     if ip and username and password:
-        routers.insert_one(
-            {"ip": ip, "username": username, "password": password}
-        )
+        routers.insert_one({"ip": ip, "username": username, "password": password})
     return redirect("/")
 
 
@@ -43,9 +41,7 @@ def router_detail(ip):
 
     # ดึง 3 ครั้งล่าสุดของ router นั้น
     records = list(
-        interface_status.find({"router_ip": ip})
-        .sort("timestamp", DESCENDING)
-        .limit(3)
+        interface_status.find({"router_ip": ip}).sort("timestamp", DESCENDING).limit(3)
     )
 
     return render_template("router_detail.html", ip=ip, records=records)

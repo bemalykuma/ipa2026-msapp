@@ -27,6 +27,6 @@ def get_interfaces(ip, username, password):
     return result
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     get_interfaces()

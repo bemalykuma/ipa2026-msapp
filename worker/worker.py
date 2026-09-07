@@ -24,10 +24,7 @@ def ssh_and_get_interfaces(ip, username, password):
         "timeout": 10,
     }
     with ConnectHandler(**device) as conn:
-        output = conn.send_command(
-            "show ip interface brief",
-            use_textfsm=True
-        )
+        output = conn.send_command("show ip interface brief", use_textfsm=True)
     return output  # list of dict อัตโนมัติ
 
 
@@ -70,9 +67,7 @@ def worker():
     RABBITMQ_PASS = os.environ.get("RABBITMQ_PASS")
 
     credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASS)
-    parameters = pika.ConnectionParameters(
-        host=RABBITMQ_HOST, credentials=credentials
-    )
+    parameters = pika.ConnectionParameters(host=RABBITMQ_HOST, credentials=credentials)
 
     connection = None
     for attempt in range(10):
