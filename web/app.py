@@ -11,19 +11,17 @@ db = client[db_name]
 routers = db["routers"]
 interface_status = db["interface_status"]
 
+
 @app.route("/", methods=["GET"])
-
-
 def index():
 
     return render_template("index.html", routers=list(routers.find()))
 
+
 @app.route("/add", methods=["POST"])
-
-
 def add_router():
 
-    ip       = request.form.get("ip")
+    ip = request.form.get("ip")
     username = request.form.get("username")
     password = request.form.get("password")
     if ip and username and password:
@@ -32,17 +30,15 @@ def add_router():
         )
     return redirect("/")
 
+
 @app.route("/delete/<id>", methods=["POST"])
-
-
 def delete_router(id):
 
     routers.delete_one({"_id": ObjectId(id)})
     return redirect("/")
 
+
 @app.route("/router/<ip>")
-
-
 def router_detail(ip):
 
     # ดึง 3 ครั้งล่าสุดของ router นั้น
